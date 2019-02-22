@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-def answer():
-    return 42
+from gol import code
+
 
 def test_answer():
-    assert answer() == 42
+    assert code.answer() == 42
 
