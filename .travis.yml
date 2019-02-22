@@ -12,9 +12,10 @@ install:
 script:
     - pytest --cov=gol/
     - pytest --cov=gol/ gol/test/
-    - pytest --cov=gol/ gol/test/test.py
+#    - pytest --cov=gol/ gol/test/test.py
+    - pytest --cov=gol/ gol.test
     - pytest --pyargs gol
-    - pytest gol/test/test.py
+#    - pytest gol/test/test.py
     - pytest gol/test/
 
 after_success:
