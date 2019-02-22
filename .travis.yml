@@ -10,7 +10,9 @@ install:
     - pip install coveralls
 
 script:
-    - pytest --cov=gol/ --pyargs gol
+    - pytest --cov=gol/
+    - pytest --pyargs gol
+    - pytest gol.test.test
 
 after_success:
     - coveralls

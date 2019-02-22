@@ -4,5 +4,5 @@ from gol import code
 
 
 def test_answer():
-    assert code.answer() == 42
+    assert(code.answer() == 42)
 
