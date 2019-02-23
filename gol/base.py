@@ -10,11 +10,11 @@ class Cell(object):
     """
 
     """
-    def __init__(self, isAlive=None, neighbours=0):
+    def __init__(self, is_alive=None, neighbours=0):
         """
 
         """
-        self.isAlive = bool(isAlive if isAlive is not None else random.randint(0, 1))
+        self.is_alive = bool(is_alive if is_alive is not None else random.randint(0, 1))
         self.neighbours = neighbours
 
     def evolve(self):
@@ -24,13 +24,13 @@ class Cell(object):
         if self.neighbours == 2:
             pass
         elif self.neighbours == 3:
-            self.isAlive = True
+            self.is_alive = True
         else:
-            self.isAlive = False
+            self.is_alive = False
         self.neighbours = 0
 
     def __str__(self):
-        return "[]" if self.isAlive else "  "
+        return "[]" if self.is_alive else "  "
 
 
 class Grid(object):
@@ -41,27 +41,18 @@ class Grid(object):
         """
 
         """
+        if cells == "demo":
+            cells = [[0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                     [1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                     [0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0],
+                     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],]
         if cells is None:
             self.cells = [[Cell() for x in range(columns)] for y in range(rows)]
         else:
             self.cells = [[Cell(cell) for cell in row] for row in cells]
-
-
-    def evolve(self):
-        """
-
-        """
         self.update_neighbourhoods()
-        self.update_cells()
 
-
-    def update_cells(self):
-        """
-
-        """
-        for y in range(len(self.cells)):
-            for x in range(len(self.cells[y])):
-                self.cells[y][x].evolve()
 
     def update_neighbourhoods(self):
         """
@@ -71,19 +62,31 @@ class Grid(object):
             for x in range(len(self.cells[y])):
                 self.update_neighbourhood(y, x)
 
-#                self.cells[rr][cc].count_neighbours(
-#                       [cell for row in self.cells[rr - 1:rr + 2] for cell in row[cc - 1:cc + 2]])
-
     def update_neighbourhood(self, row, column):
         """
 
         """
-        if self.cells[row][column].isAlive:
+        if self.cells[row][column].is_alive:
             for y in range(row - 1, row + 2):
                 for x in range(column - 1, column + 2, 2 if y == row else 1):
                     self.cells[y % len(self.cells)][x % len(self.cells[0])].neighbours += 1
-#                    self.cells[y][x].increment_neighbours()
-#                    print(self.cells[y][x].neighbours)
+
+    def evolve(self, cycles=1):
+        """
+
+        """
+        for cycle in range(cycles):
+            self.update_cells()
+            self.update_neighbourhoods()
+
+
+    def update_cells(self):
+        """
+
+        """
+        for y in range(len(self.cells)):
+            for x in range(len(self.cells[y])):
+                self.cells[y][x].evolve()
 
     def __str__(self):
         string = ""

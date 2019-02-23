@@ -7,14 +7,14 @@ class TestCell(object):
 
     def test_initialisation(self):
         cell = Cell()
-        assert type(cell.isAlive)    == bool
+        assert type(cell.is_alive)   == bool
         assert type(cell.neighbours) == int
-        assert cell.neighbours == 0
+        assert cell.neighbours       == 0
         cell = Cell(1)
-        assert cell.isAlive == True
+        assert cell.is_alive   == True
         assert cell.neighbours == 0
-        cell = Cell(neighbours=42, isAlive=False)
-        assert cell.isAlive == False
+        cell = Cell(neighbours=42, is_alive=False)
+        assert cell.is_alive   == False
         assert cell.neighbours == 42
 
     def test_evolution_rule_1(self):
@@ -24,10 +24,10 @@ class TestCell(object):
         """
         cell = Cell(True, 0)
         cell.evolve()
-        assert cell.isAlive == False
+        assert cell.is_alive == False
         cell = Cell(True, 1)
         cell.evolve()
-        assert cell.isAlive == False
+        assert cell.is_alive == False
 
     def test_evolution_rule_2(self):
         """
@@ -36,10 +36,10 @@ class TestCell(object):
         """
         cell = Cell(True, 2)
         cell.evolve()
-        assert cell.isAlive == True
+        assert cell.is_alive == True
         cell = Cell(True, 3)
         cell.evolve()
-        assert cell.isAlive == True
+        assert cell.is_alive == True
 
     def test_evolution_rule_3(self):
         """
@@ -48,7 +48,7 @@ class TestCell(object):
         """
         cell = Cell(True, 4)
         cell.evolve()
-        assert cell.isAlive == False
+        assert cell.is_alive == False
 
     def test_evolution_rule_4(self):
         """
@@ -57,13 +57,13 @@ class TestCell(object):
         """
         cell = Cell(False, 2)
         cell.evolve()
-        assert cell.isAlive == False
+        assert cell.is_alive == False
         cell = Cell(False, 3)
         cell.evolve()
-        assert cell.isAlive == True
+        assert cell.is_alive == True
         cell = Cell(False, 4)
         cell.evolve()
-        assert cell.isAlive == False
+        assert cell.is_alive == False
 
     def test_stringify(self):
         cell = Cell(True)
