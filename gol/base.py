@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-
+     hosts the classes `Cell` and `Grid`
 """
 
 import random
@@ -8,18 +8,18 @@ import random
 
 class Cell(object):
     """
-
+        implements a two-state cell in Conway's Game of Life
     """
     def __init__(self, is_alive=None, neighbours=0):
         """
-
+            initialises a `Cell` with a state and a number of neighbours
         """
         self.is_alive = bool(is_alive if is_alive is not None else random.randint(0, 1))
         self.neighbours = neighbours
 
     def evolve(self):
         """
-
+            evolves the cell according to the rules of Conway's Game of Life
         """
         if self.neighbours == 2:
             pass
@@ -35,11 +35,11 @@ class Cell(object):
 
 class Grid(object):
     """
-
+        implements a two-dimensional grid of cells in Conway's Game of Life
     """
     def __init__(self, cells=None, rows=5, columns=11):
         """
-
+            initialises a two-dimensional `Grid` of `Cell`s
         """
         if cells == "demo":
             cells = [[0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -56,7 +56,7 @@ class Grid(object):
 
     def update_neighbourhoods(self):
         """
-
+            updates the number of alive neighbours of a every cell
         """
         for y in range(len(self.cells)):
             for x in range(len(self.cells[y])):
@@ -64,7 +64,7 @@ class Grid(object):
 
     def update_neighbourhood(self, row, column):
         """
-
+            updates the number of alive neighbours of a specific cell
         """
         if self.cells[row][column].is_alive:
             for y in range(row - 1, row + 2):
@@ -73,7 +73,7 @@ class Grid(object):
 
     def evolve(self, cycles=1):
         """
-
+            processes a number of evolution cycles for the entire grid
         """
         for cycle in range(cycles):
             self.update_cells()
@@ -82,7 +82,7 @@ class Grid(object):
 
     def update_cells(self):
         """
-
+            updates the state of every cell in the grid
         """
         for y in range(len(self.cells)):
             for x in range(len(self.cells[y])):
